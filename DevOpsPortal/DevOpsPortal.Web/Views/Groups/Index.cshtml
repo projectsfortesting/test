@@ -1,0 +1,79 @@
+﻿
+@using DevOpsSolution.Models;
+@model GroupViewModel
+@*@{
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }*@
+@{ ViewBag.Title = "Groups"; }
+<a href="~/Views/Groups/Index.cshtml">~/Views/Groups/Index.cshtml</a>
+
+<div align="right">
+    <input type="button" class="bg-blue-active" name="btnCreateGrp" value="+ Create New Group" onclick="onclick=location.href='@Url.Action("Create")'" />
+</div>
+
+<div class="table-responsive">
+    <table id="mytable" class="table table-bordered ">
+        <thead>
+            <tr class="bg-gray" style="font-family:Arial;font-size:13px;color:#666666">
+                <th>GroupName</th>
+                <th>Permissions</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.grplist)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => item.Name) </td>
+
+                    <td>@Html.ActionLink("Permissions", "GroupRoles", new { id = item.Id }) @Html.HiddenFor(model => item.Id)</td>
+                    <td>
+                        <input type="image" src="~/Content/AdminLTE/img/tableico_edit.png" onclick="location.href='@Url.Action("Edit", new { id = item.Id })'" />
+                        <input type="image" src="~/Content/AdminLTE/img/tableico_del.png" onclick="location.href='@Url.Action("Delete", new { id = item.Id })'" />
+
+                        @* @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    </td>
+                    @Html.HiddenFor(model => item.Name)
+
+                </tr>
+
+            }
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+         @foreach (var item in Model.Savedsurveydetails)
+                                {
+    @foreach (var item in model)
+    {
+        <tr>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Permissions", "GroupRoles", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    </table>*@

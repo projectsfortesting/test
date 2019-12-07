@@ -1,0 +1,48 @@
+﻿@model DevOpsSolution.Models.SelectUserGroupsViewModel
+@using DevOpsSolution.Models;
+@*@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}*@
+
+<h3>User @Html.DisplayFor(model => model.UserName):Groups</h3>
+
+@using (Html.BeginForm("UserGroups", "Account", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.UserName)
+            </div>
+        </div>    
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr class="bg-gray" style="font-family:Arial;font-size:13px;color:#666666">
+                    <th>
+                        Select
+                    </th>
+                    <th>
+                        Group
+                    </th>                 
+                </tr>
+                @Html.EditorFor(model => model.Groups)
+          
+            </table>
+
+        </div>   
+      
+        <br />
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

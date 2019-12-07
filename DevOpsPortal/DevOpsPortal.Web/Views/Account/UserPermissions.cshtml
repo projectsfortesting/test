@@ -1,0 +1,37 @@
+﻿@using DevOpsSolution.Models;
+@model DevOpsSolution.Models.UserPermissionsViewModel
+@*@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}*@
+<h3>User @Html.DisplayFor(model => model.UserName):Permissions</h3>
+<hr />
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tr class="bg-gray" style="font-family:Arial;font-size:13px;color:#666666">
+            <th>
+                Role Permission
+            </th>
+            <th>
+                Description
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Roles)
+        {
+            <tr >
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,75 @@
+﻿@*
+    This partial controls the top menu of the AdminLTE Template, being called automatically by _AdminLteLayout
+       TODO: All of the content in here is stand-in that must be replaced by the real behavior of your app
+*@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+@{
+    ViewBag.Layout = null;
+}
+<script type="text/javascript">
+    function preventBack() {
+        window.history.forward();
+    }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () 
+    {
+        null;
+    };
+
+    //session end 
+    @*var sessionTimeoutWarning = @Session.Timeout- 6;
+    var sessionEndTimeout = @Session.Timeout-1;*@
+
+    //var sTimeoutWarning = parseInt(sessionTimeoutWarning) * 60 * 1000;
+    //setTimeout('SessionWarning()', sTimeoutWarning);
+ 
+    //function SessionWarning() {
+    //    alert("Session is about to expire in 5 mins. Please save the data");
+    //}
+
+    //var sTimeoutEnd = parseInt(sessionEndTimeout) * 60 * 1000;
+    //setTimeout('SessionEnd()', sTimeoutEnd);
+
+    //function SessionEnd() {
+    //    document.getElementById('logoutForm').submit();
+    //}
+</script>
+<header class="main-header">
+    <!-- Logo -->
+    <a class="logo"><img src="~/Content/AdminLTE/img/top_logo.png" /></a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                @using Microsoft.AspNetCore.Identity
+                @*@if (Request.IsAuthenticated)
+                {*@
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @*@Html.AntiForgeryToken()*@
+
+                        <li>
+                            <input type="image" src="~/Content/AdminLTE/img/topico_out.png" onsubmit="javascript: document.getElementById('logoutForm').submit();" />
+                        </li>
+
+                    }
+
+                @*}*@
+                @*<li>
+                    <i class="fa fa-gears" style="color:white;" id="ChangePassword" title="Change Password" onclick="location.href='@Url.Action("Manage", "Account")'"></i>&nbsp;&nbsp;&nbsp;
+                </li>*@
+
+
+
+            </ul>
+        </div>
+    </nav>
+</header>
+

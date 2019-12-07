@@ -1,0 +1,109 @@
+﻿@using DevOpsSolution.Models;
+
+@model DevOpsSolution.Models.EditUserViewModel
+@*@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}*@
+@{
+    ViewBag.Title = "Edit User";
+}
+
+@using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        @Html.ValidationSummary()
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @disabled = "disabled" } })
+                @Html.HiddenFor(model => model.Id, new { Value = Model.Id })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Organization","", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.OrgId, Model.Organizations, "Select Organization", new { @class = "form-control", Id = "orgName" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Org Level", "",new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.OrgLevelTypeId, Model.orgLevelTypes, "Select Org Levels",
+           new { @class = "form-control", Id = "orgLeveltypes", @onchange = "GetOrgUnits()" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Org Unit","", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.OrgLevelid, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"),
+                   "Select Org Unit", new { @class = "form-control", Id = "orgUnits" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="col-md-1"><input type="submit" class="bg-blue-active" value="Save" /></div>
+                <div class="col-md-1"><input type="button" name="Cancel" id="cancelbtn" value="Cancel" class="btn-default text-blue" onclick="location.href='@Url.Action("Index", "Account")'" /></div>
+              
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+<script>
+    function GetOrgUnits() {
+        var orgid = $('#orgName').val();
+        var orgleveltypeid = $('#orgLeveltypes').val();
+    $.ajax({
+        url: '@Url.Action("GetOrgUnits", "Account")',
+        type: "GET",
+        dataType: "JSON",
+        data: { orgId: orgid, orgleveltypeid :orgleveltypeid},
+        success: function (orgUnits) {
+            console.log(orgUnits);
+            $("#orgUnits").html(""); // clear before appending new list
+            $.each(orgUnits, function (i, unit) {
+                $("#orgUnits").append(
+                    $('<option></option>').val(unit.Id).html(unit.Name));
+                console.log(unit.Id);
+                console.log(unit.Name);
+            });
+        }
+    });
+  }
+</script>
+
+
+}

@@ -1,0 +1,62 @@
+﻿@using DevOpsSolution.Models;
+@model DevOpsSolution.Models.LoginViewModel
+@using Microsoft.AspNetCore.Identity;
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*@Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/AdminLTE")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+    <link href="~/Content/AdminLTE/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+@*@{
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }*@
+@{
+    ViewBag.Title = "Manage Account";
+}
+@*<h2>@ViewBag.Title.</h2>*@
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewBag.HasLocalPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else if (ViewBag.HasResetPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else
+        {
+            @Html.Partial("_SetPasswordPartial")
+        }
+    </div>
+</div>
+</html>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+<script>
+        function showHidePassword(obj) {
+            var objId = obj.split('_')[1];
+            var attr = $('#' + objId).attr('type');
+            if (attr === 'password') {
+                attr = 'text';
+                $("#" + obj).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+            }
+            else if (attr === 'text') {
+                $("#" + obj).toggleClass('glyphicon-eye-open').toggleClass('glyphicon-eye-close')
+                attr = 'password'
+            }
+            $('#' + objId).attr('type', attr);
+        }
+    
+</script>
+}

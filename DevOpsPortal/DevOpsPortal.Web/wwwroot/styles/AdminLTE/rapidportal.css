@@ -1,0 +1,50 @@
+﻿
+
+
+/* styling for reports  */
+.h1-header{
+    font-family:Arial;
+    font-size:20px;
+    color:#000000;
+    font-style:normal   
+}
+.h2-header {
+    font-family: Arial;
+    font-size: 18px;
+    color: #336666;
+}
+
+.qtntext{font-family:Arial;font-size:13pt;color:#666666;font-style:normal;}
+
+.Prelimqtntext{font-family:Arial;font-size:12pt;color:#666666;font-style:normal;margin-bottom: 2px;}
+
+.qtntextpadding{font-family:Arial;font-size:14pt;color:#666666;font-style:normal;padding-left:5px}
+
+.answertext{font-family:Arial;font-size:13pt;color:#666666;font-style:normal;padding-left:30px;LINE-HEIGHT:11px;font-weight:bold;margin-bottom: 30px;}
+
+.qtntextheading{font-family:Arial;font-size:20pt;color:#666666;font-style:normal}
+
+.colorstrip{
+    height: 50px;
+    border-bottom:solid 7px #c3dbdb;
+    width:50%;   
+}
+.colorstrip1{
+    height: 50px;
+    border-bottom:solid 7px #c3dbdb;
+    width:820px;   
+}
+.qtnradiobtn
+{
+padding-left : 10px;
+
+}
+.Rqtnradiobtn
+{
+padding-left : 30px;
+font-family:Arial;font-size:12pt;color:#666666;font-style:normal;font-weight:normal
+}
+.tableth
+{
+    text-align:center !important;  
+}

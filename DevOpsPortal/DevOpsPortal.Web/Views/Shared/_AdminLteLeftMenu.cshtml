@@ -1,0 +1,191 @@
+﻿@*
+    This partial controls the left menu of the AdminLTE dashboard and is called automatically by _AdminLteLayout
+       This is where you can add, modify, or remove navigation options in your app
+       TODO: This preserves the links as-is for the demo, which lead to broken pages!
+       It's up to you to make sure these links either get deleted or lead somewhere REAL!
+*@
+
+
+@{
+    Layout = null;
+}
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        @using Microsoft.AspNetCore.Identity
+        @*@if (Request.IsAuthenticated)
+        {*@
+            //@Html.AntiForgeryToken()
+            <div class="user-panel">
+                <div class="pull-left image">
+                    @*<img src="/Content/AdminLTE/img/user2-160x160.jpg" class="img-circle" alt="User Image" />*@
+
+                </div>
+
+                <div class="pull-left info">
+                    <p>
+                        <img src="~/Content/AdminLTE/img/side_picsample.png" />
+                        @User.Identity.Name
+                    </p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+
+
+            </div>
+        @*}*@
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search..." />
+                <span class="input-group-btn">
+                    <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        @if (User.IsInRole("PreliminaryAssessmentConsultant") && User.IsInRole("ReadinessAssessmentConsultant") && User.IsInRole("MaturityAssessmentConsultant") && User.IsInRole("StrategyInputConsultant") && !User.IsInRole("User"))
+        {
+            <ul class="sidebar-menu">
+                @*<li class="header">MAIN NAVIGATION</li>*@
+                <li class="active treeview">
+
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_home.png" />
+                        @*<i class="fa fa-dashboard"></i>*@
+                        <span>Home</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active">@Html.ActionLink("Home", "Index", "AdminLte", routeValues: null, htmlAttributes: new { id = "HomeLink" })</li>
+                    </ul>
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_usr.png" /><span>Strategy</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active">@Html.ActionLink("Assessment Summary", "ProjectSummary", "PrelimAssess", routeValues: null, htmlAttributes: new { id = "AssessSummaryIndex" })</li>
+                        @* <li class="active">@Html.ActionLink("Tools Configuration", "ToolsConfigCreate", "PrelimAssess", routeValues: null, htmlAttributes: new { id = "ToolsConfigCreate" })</li>*@
+                        <li class="active">@Html.ActionLink("Maturity Assessment", "Assess", "Assess", routeValues: null, htmlAttributes: new { id = "AssessLink" })</li>
+                        <li class="active">@Html.ActionLink("Strategy Input", "ImportExcel", "StrategyInput", routeValues: null, htmlAttributes: new { id = "StrategyLink" })</li>
+
+                    </ul>
+                </li>
+            </ul>
+        }
+
+        else if (User.IsInRole("KubePlayAdmin") && User.IsInRole("KubePlayUser") && !User.IsInRole("User"))
+        {
+            <ul class="sidebar-menu">
+                @*<li class="header">MAIN NAVIGATION</li>*@
+                <li class="active treeview">
+
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_home.png" />
+                        @*<i class="fa fa-dashboard"></i>*@
+                        <span>Home</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active">@Html.ActionLink("Home", "Index", "AdminLte", routeValues: null, htmlAttributes: new { id = "HomeLink" })</li>
+                    </ul>
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_perm.png" /><span>Manage Cluster </span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active">@Html.ActionLink("Kubeplay", "Inventory", "KuberInventory", routeValues: null, htmlAttributes: new { })</li>
+                        @*<li class="active">@Html.ActionLink("Kubeplay", "Inventory", "KuberInventory", routeValues: null, htmlAttributes: new { id = "KuberLink" })</li>*@
+                    </ul>
+                </li>
+            </ul>
+        }
+
+        else /*if (!User.IsInRole("PreliminaryAssessmentConsultant") && !User.IsInRole("ReadinessAssessmentConsultant") && !User.IsInRole("MaturityAssessmentConsultant") && !User.IsInRole("StrategyInputConsultants"))*/
+        {
+            <ul class="sidebar-menu">
+                @*<li class="header">MAIN NAVIGATION</li>*@
+                <li>
+
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_home.png" />
+                        @*<i class="fa fa-dashboard"></i>*@
+                        <span>Home</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display:none;">
+                        <li class="active">@Html.ActionLink("Home", "Index", "AdminLte", routeValues: null, htmlAttributes: new { id = "HomeLink" })</li>
+                    </ul>
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_usr.png" /><span>Devops Assessment</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display:none;">
+                        <li class="active">@Html.ActionLink("Assessment Summary", "ProjectSummary", "PrelimAssess", routeValues: null, htmlAttributes: new { id = "AssessSummaryIndex" })</li>
+                        @* <li class="active">@Html.ActionLink("Tools Configuration", "ToolsConfigCreate", "PrelimAssess", routeValues: null, htmlAttributes: new { id = "ToolsConfigCreate" })</li>*@
+                        <li class="active">@Html.ActionLink("Maturity Assessment", "Assess", "Assess", routeValues: null, htmlAttributes: new { id = "AssessLink" })</li>
+                        <li class="active">@Html.ActionLink("Strategy Input", "ImportExcel", "StrategyInput", routeValues: null, htmlAttributes: new { id = "StrategyLink" })</li>
+
+                    </ul>
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_setup.png" /> <span>Vorchestrator</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display:none;">
+                        <li class="active">@Html.ActionLink("Manage Subscriptions", "ManageSubscriptions", "ProvisionInfra", routeValues: null, htmlAttributes: new { id = "SubscriptionLink" })</li>
+                        <li class="active">@Html.ActionLink("Provision Infrastructure", "InfraHostDetails", "ProvisionInfra", routeValues: null, htmlAttributes: new { id = "InfraLink" })</li>
+                        <li class="active">@Html.ActionLink("Infrastructure Summary", "InfraHostSummary", "ProvisionInfra", routeValues: null, htmlAttributes: new { id = "SummaryLink" })</li>
+                        @*<li class="active">@Html.ActionLink("Setup Toolschain", "ToolChainIndex", "ToolChain", routeValues: null, htmlAttributes: new { id = "ToolsLink" })</li>*@
+                    </ul>
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_perm.png" /><span>Manage Cluster </span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display:none;">
+                        <li class="active">@Html.ActionLink("Manage Kubernetes", "ManageKubernetes", "ManageKubernetes", routeValues: null, htmlAttributes: new { id = "KubernetesLink" })</li>
+                        <li class="active">@Html.ActionLink("Kubeplay", "Inventory", "KuberInventory", routeValues: null, htmlAttributes: new { })</li>
+                        <li class="active">@Html.ActionLink("Design Cluster", "K8ClusterIndex", "K8Cluster", routeValues: null, htmlAttributes: new { id = "KubernetesClusterLink" })</li>
+                    </ul>
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_devops.png" /><span>Hadron</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display:none;">
+                        <li class="active">@Html.ActionLink("Design Platform", "ToolchainProvisionIndex", "KubeToolchain", routeValues: null, htmlAttributes: new { id = "KubeToolchainLink" })</li>
+                        <li class="active">@Html.ActionLink("Design Pipeline", "PipelineProvisionIndex", "KubePipeline", routeValues: null, htmlAttributes: new { id = "PipelineProvisionLink" })</li>
+
+                    </ul>
+                    @if (User.IsInRole("SuperAdmin"))
+                    {
+                        <a href="#">
+                            <img src="~/Content/AdminLTE/img/sideicox_settings.png" /><span>Manage Hadron</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu" style="display:none;">
+
+                            <li class="active">@Html.ActionLink("Manage Toolchain Image", "ManageToolchainImage", "ToolchainProvision", routeValues: null, htmlAttributes: new { id = "ToolchainImageLink" })</li>
+                            <li class="active">@Html.ActionLink("KubeToolList Details", "Index", "KubeToolListMasters", routeValues: null, htmlAttributes: new { id = "KubeToolListLink" })</li>
+                          </ul>
+                    }
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_dash.png" /><span>Hadron Monitor</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display:none;">
+                        <li class="active">@Html.ActionLink("Agile Dashboard", "HygieiaDashboard", "HadronMonitor", routeValues: null, htmlAttributes: new { id = "HygieiaDashboardLink" })</li>
+                        <li class="active">@Html.ActionLink("Platform Dashboard", "GrafanaDashboard", "HadronMonitor", routeValues: null, htmlAttributes: new { id = "GrafanaDashboardLink" })</li>
+                        @*<li class="active">@Html.ActionLink("SonarQube Dashboard", "SonarqubeDashboard", "HadronMonitor", routeValues: null, htmlAttributes: new { id = "SonarqubeDashboardLink" })</li>*@
+                        <li class="active">@Html.ActionLink("App Dashboard", "KibanaDashboard", "HadronMonitor", routeValues: null, htmlAttributes: new { id = "KibanaDashboardLink" })</li>
+                    </ul>
+                    <a href="#">
+                        <img src="~/Content/AdminLTE/img/sideicox_usrm.png" /> <span>Governance</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display:none;">
+                        <li class="active">@Html.ActionLink("Organization", "Index", "Organization", routeValues: null, htmlAttributes: new { id = "OrgLink" })</li>
+                        <li class="active">
+                            @Html.ActionLink("Users", "Index", "Account", routeValues: null, htmlAttributes: new { id = "UsersLink" })
+                        </li>
+                        <li class="active">
+                            @Html.ActionLink("Groups", "Index", "Groups", routeValues: null, htmlAttributes: new { id = "GroupsLink" })
+                        </li>
+                        <li class="active">
+                            @Html.ActionLink("Permissions", "Index", "Roles", routeValues: null, htmlAttributes: new { id = "RolesLink" })
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        }
+
+    </section>
+    <!-- /.sidebar -->
+</aside>

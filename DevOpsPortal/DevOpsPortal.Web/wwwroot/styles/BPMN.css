@@ -1,0 +1,26 @@
+/* for BPMN.html */
+
+/* Diagram and palette area */
+
+
+
+#PaletteAndDiagram {
+  position: relative;
+  width: 100%;
+}
+
+#sideBar {
+  float: left;
+  width: 160px;
+  min-height: 700px;
+  text-align: center;
+  border: 1px solid gray;
+}
+
+.myPaletteDiv {
+  width: 150px;
+  height: 150px;
+  display:none;
+}
+
+

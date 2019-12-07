@@ -1,0 +1,175 @@
+﻿@using DevOpsSolution.Models;
+@model DevOpsSolution.Models.LoginViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*Favicon route path issue fix*@
+    <link href="@Url.Content("~/favicon.ico")" rel="icon"   />
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <link href="~/styles/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.min.css" rel="stylesheet" />
+    <script src="~/scripts/modernizr-2.6.2.js"></script>
+    <link href="~/styles/AdminLTE/AdminLTE.min.css" rel="stylesheet" />
+    <script src="~/scripts/respond.js"></script>
+    <script src="~/scripts/jquery-1.10.2.js"></script>
+    <script src="~/scripts/jquery2.13.min.js"></script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-8">
+                    <span>
+                        <img src="~/Content/AdminLTE/img/Banner_Image01.png" />
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <div class="=box">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="login-logo">
+                            <img src="~/Content/AdminLTE/img/logo_Rapid.png" />
+                        </div>
+
+                    </div>
+                    <div>
+
+                    </div>
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,true, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary()
+                        <div class="form-group" align="left">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-offset-1"><img src="~/Content/AdminLTE/img/User_icon.png" /></div>
+                        </div>
+                        <div class="form-group" align="left">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-offset-1">
+                                <img src="~/Content/AdminLTE/img/Lock_icon.png" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-2"></div>
+                            <p>
+                                <span align="right">
+                                    @*<a><img src="~/Content/AdminLTE/img/ToggleOn.png" />
+                        </a>*@
+                                </span>
+                                @*<a>@Html.Label("Remember Me", new { @style = "color:#666666;font-family: Arial;font-size: 10pt;font-style:normal;" })</a>*@
+                                @*<span align="left">@Html.ActionLink("Forgot Password ?", "Forgot")</span>*@
+
+                            </p>
+                        </div>
+                        <div>
+                            <div class="col-md-2"></div>
+                            <span align="center">
+                                <input type="submit" name="login" id="btnLogin" value="Login" class="btn bg-blue-active" />
+                            </span>
+                            <div>
+                                <div class="col-md-2"></div>
+                                @*@Html.Label("By Logging in, you are agreeing to our", new { @style = "color:#666666;font-family: Arial;font-size: 10pt;font-style:normal;" })
+                    @Html.ActionLink("T&Cs", "", new { @style = "color:#3399ff;font-family: Arial;font-size: 10pt;font-style:normal; " })*@
+
+                            </div>
+                            
+                        </div>
+                        
+                        <div>
+                            <span style="margin-left:15%;">
+                                <input type="button" class="btn-link" value="Forgot your password?" onclick="CheckUsername();" />
+                            </span>
+                        </div>
+                        <br />
+                        <br />
+
+                        if (!string.IsNullOrEmpty(Convert.ToString(ViewData["Success"])))
+                        {
+                            <div class="alert alert-danger alert-dismissable" id="alertlabel">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>@ViewData["Success"]</strong>
+                            </div>
+                        }
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <div>
+                            <div class="col-md-2"></div>
+                            @Html.Label("Best viewed in Chrome browser","", new { @style = "color:#666666;font-family: Arial;font-size: 10pt;font-style:normal;" })
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    function CheckUsername()
+    {
+        if (($('#UserName').val().trim() == null) || ($('#UserName').val().trim() == '')) {
+            alert('Please Enter UserName!');
+            $('#UserName').focus();
+            event.preventDefault();
+            return false;
+
+        }
+        else {
+            var uName = $('#UserName').val().trim();
+            $.ajax({
+                url: '@Url.Action("ForgotPassword","Account")',
+                type: "Post",
+                cache: false,
+                data: { userName: uName},
+                success: function (response) {
+                    if (response.Success) {
+                        window.location.reload(true);
+                    }
+                }
+                 
+            });
+            
+        }
+    }
+    </script>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")*@
+
+</body>
+</html>
+
+
+    

@@ -1,0 +1,58 @@
+﻿
+@model DevOpsSolution.Models.OrgHierarchyLevelAddUsersViewModel
+
+@{
+    ViewBag.Layout = null;
+}
+@if (Model.userslist != null && Model.userslist.Count() > 0)
+{
+    for (int item = 0; item < Model.userslist.Count; item++)
+    {
+        <tr>
+            <td>
+                @Html.EditorFor(modelItem => Model.userslist[item].Selected)
+                @Html.HiddenFor(modelItem => Model.userslist[item].Selected, new { Value = Model.userslist[item].Selected })
+                @Html.HiddenFor(modelItem => Model.userslist[item].OrgId, new { Value = Model.userslist[item].OrgId })
+                @Html.HiddenFor(modelItem => Model.userslist[item].OrgLevelid, new { Value = Model.userslist[item].OrgLevelid })
+                @Html.HiddenFor(modelItem => Model.userslist[item].OrgLevelTypeId, new { Value = Model.userslist[item].OrgLevelTypeId })
+                @Html.HiddenFor(modelItem => Model.userslist[item].userid, new { Value = Model.userslist[item].userid })
+                @Html.HiddenFor(modelItem => Model.userslist[item].UserName, new { Value = Model.userslist[item].UserName })
+                @Html.HiddenFor(modelItem => Model.userslist[item].projectname, new { Value = Model.userslist[item].projectname })
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => Model.userslist[item].UserName)
+                @Html.HiddenFor(modelItem => Model.userslist[item].Selected, new { Value = Model.userslist[item].Selected })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.userslist[item].FirstName)
+                @Html.HiddenFor(modelItem => Model.userslist[item].FirstName, new { Value = Model.userslist[item].FirstName })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.userslist[item].LastName)
+                @Html.HiddenFor(modelItem => Model.userslist[item].LastName, new { Value = Model.userslist[item].LastName })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.userslist[item].Email)
+                @Html.HiddenFor(modelItem => Model.userslist[item].Email, new { Value = Model.userslist[item].Email })
+            </td>
+            <td>
+                @Html.CheckBoxFor(modelItem => Model.userslist[item].isAdmin)
+                @Html.HiddenFor(modelItem => Model.userslist[item].isAdmin, new { Value = Model.userslist[item].isAdmin })
+            </td>
+        </tr>
+    }
+}
+
+else 
+{
+    <tr>       
+    </tr>
+}
+
+
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+    </script>
+}

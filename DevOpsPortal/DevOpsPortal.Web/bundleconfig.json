@@ -1,0 +1,48 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/styles/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/bootstarp.min.css",
+    "inputFiles": [
+      "wwwroot/styles/bootstrap.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bootstarp.min.js",
+    "inputFiles": [
+      "wwwroot/scripts/bootstrap.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/jquery.js",
+    "inputFiles": [
+      "wwwroot/scripts/jquery-{version}.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/bootstrap.min.js",
+    "inputFiles": [
+      "wwwroot/scripts/bootstrap.js",
+      "wwwroot/scripts/respond.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

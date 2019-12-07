@@ -1,0 +1,27 @@
+﻿@using DevOpsSolution.Models;
+@model DevOpsSolution.Models.GroupViewModel
+@*@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}*@
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>  
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.group.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.group.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.group.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

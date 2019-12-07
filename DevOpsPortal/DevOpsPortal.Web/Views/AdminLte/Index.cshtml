@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="5" class=""></li>
+
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="~/Content/AdminLTE/img/carousel1.png" alt="Take DevOps Assessment">
+                            <div class="carousel-caption">
+                                DevOps Maturity
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="~/Content/AdminLTE/img/carousel2.png" alt="Orchestrate ToolChain">
+
+                            <div class="carousel-caption">
+                                Orchestrate ToolChain
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="~/Content/AdminLTE/img/carousel3.png" alt="Orchestrate CD Pipeline">
+
+                            <div class="carousel-caption">
+                                Orchestrate CD
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="~/Content/AdminLTE/img/carousel4.png" alt="Provision Infrastructure ">
+
+                            <div class="carousel-caption">
+                                Provision Infrastructure
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="~/Content/AdminLTE/img/carousel6.png" alt="Manage Infrastructure ">
+
+                            <div class="carousel-caption">
+                                Manage Infrastructure
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <img src="~/Content/AdminLTE/img/carousel7.png" alt="Manage Operations ">
+
+                            <div class="carousel-caption">
+                                Manage Operations
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="fa fa-angle-right"></span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<link href="~/styles/bootstrap.css" rel="stylesheet" />
+<link href="~/css/site.min.css" rel="stylesheet" />
+<script src="~/scripts/modernizr-2.6.2.js"></script>
+<link href="~/styles/AdminLTE/AdminLTE.min.css" rel="stylesheet" />
+<script src="~/scripts/respond.js"></script>
+<script src="~/scripts/jquery-1.10.2.js"></script>
+<script src="~/scripts/jquery2.13.min.js"></script>
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            sessionStorage.clear();
+        });
+    </script>
+
+}

@@ -1,0 +1,67 @@
+/*
+Default CSS for the Data inspector
+see also: dataInspector.js, dataInspector.html
+*/
+
+/*
+  Grey color palette
+  https://www.google.com/design/spec/style/color.html
+/*   #FAFAFA; /* Grey 50  */
+/*   #F5F5F5; /* Grey 100 */
+/*   #EEEEEE; /* Grey 200 */
+/*   #E0E0E0; /* Grey 300 */
+/*   #BDBDBD; /* Grey 400 */
+/*   #9E9E9E; /* Grey 500 */
+/*   #757575; /* Grey 600 */
+/*   #616161; /* Grey 700 */
+/*   #424242; /* Grey 800 */
+/*   #212121; /* Grey 900 */
+
+.inspector {
+    display: inline-block;
+    width: 100%;
+    font: bold 13px helvetica, sans-serif;
+    background-color: #06102B; /* Grey 900 */
+    color: #C9D0E2; /* Grey 100 */
+    cursor: default;
+    border-radius: 6px;
+}
+
+    .inspector table {
+        border-collapse: separate;
+        border-spacing: 2px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .inspector td, th {
+        padding: 2px;
+    }
+
+    .inspector input {
+        background-color: #FFFFF0; /* Grey 800 */
+        color: #252F33; /* Grey 100 */
+        font: bold 13px helvetica, sans-serif;
+        width: 200px;
+        height: 20px;
+        border-radius: 4px;
+        border: 0px;
+        padding: 2px;
+    }
+
+        .inspector input:disabled {
+            background-color: #BDBDBD; /* Grey 400 */
+            color: #616161; /* Grey 700 */
+        }
+
+    .inspector select {
+        background-color: #FFFFF0;
+        color: #252F33; 
+        height:27px;
+        width:205px;
+    }
+
+    .inspector input[type='checkbox'] {
+        margin: -55px;
+        height: 15px;
+    }
