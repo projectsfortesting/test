@@ -42,8 +42,9 @@ namespace DevOpsPortal.Data
         }
 
         #region DBTables
-         public virtual DbSet<DevOpsPortal.Data.ApplicationRole> Roles { get; set; }
+        public virtual DbSet<DevOpsPortal.Data.ApplicationRole> Roles { get; set; }
         public DbSet<DevOpsPortal.Data.Group> Groups { get; set; }
+        public DbSet<ApplicationUserRole> UserRoles { get; set; }
 
         // public DbSet<DevOpsPortal.Data.DevOpsFacets> DevOpsFacets { get; set; }
         //
@@ -171,7 +172,7 @@ namespace DevOpsPortal.Data
         #endregion
 
         #region Commenting for now
-       // overriding the asp.net tables
+        // overriding the asp.net tables
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             if (modelBuilder == null)
@@ -181,11 +182,13 @@ namespace DevOpsPortal.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers").Property(p => p.UserName).IsRequired(); ;
             modelBuilder.Entity<ApplicationUser>().HasMany<ApplicationUserGroup>((ApplicationUser u) => u.Groups);
+            modelBuilder.Entity<ApplicationUser>().HasMany(x => x.UserRoles).WithOne();
+            modelBuilder.Entity<ApplicationRole>().HasMany(x => x.UserRoles).WithOne();
             modelBuilder.Entity<ApplicationUserGroup>().ToTable("ApplicationUserGroups").HasKey((ApplicationUserGroup r) => new { UserId = r.UserId, GroupId = r.GroupId });
             modelBuilder.Entity<Group>().HasMany<ApplicationRoleGroup>((Group g) => g.Roles);
             modelBuilder.Entity<ApplicationRoleGroup>().ToTable("ApplicationRoleGroups").HasKey((ApplicationRoleGroup gr) => new { RoleId = gr.RoleId, GroupId = gr.GroupId });
             modelBuilder.ApplyConfiguration(new GroupConfiguration());
-            modelBuilder.Entity<IdentityRole>().ToTable("AspNetRoles").Property(r=> r.Name).IsRequired();
+            modelBuilder.Entity<IdentityRole>().ToTable("AspNetRoles").Property(r => r.Name).IsRequired();
             modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("AspNetUserLogins").HasKey((IdentityUserLogin<string> l) =>
                     new { UserId = l.UserId, LoginProvider = l.LoginProvider, ProviderKey = l.ProviderKey });
             modelBuilder.Entity<IdentityUserRole<string>>().ToTable("AspNetUserRoles").HasKey((IdentityUserRole<string> r) =>
@@ -202,17 +205,17 @@ namespace DevOpsPortal.Data
             modelBuilder.Seed();
         }
         #endregion
-      
+
     }
     public static class ModelBuilderExtensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-           
+
             modelBuilder.Entity<ApplicationUser>().HasData(
                 new ApplicationUser
                 {
-
+                    Id = "202",
                     UserName = "PlainVanillaUser",
                     FirstName = "PlainVanillaFirstName",
                     LastName = "PlainVanillaLastName",
@@ -224,6 +227,18 @@ namespace DevOpsPortal.Data
                     User_Active = true
                 }
             );
+
+            modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole {
+                Id = "101",
+                Description = "TestRole",
+                Name = "Developer"
+            });
+
+            modelBuilder.Entity<ApplicationUserRole>().HasData(new ApplicationUserRole
+            {
+                RoleId = "101",
+                UserId = "202"
+            });
         }
 
     }
@@ -256,5 +271,5 @@ namespace DevOpsPortal.Data
     {
         public virtual ApplicationUser User { get; set; }
     }
-   
+
 }

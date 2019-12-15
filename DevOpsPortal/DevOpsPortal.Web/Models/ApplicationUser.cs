@@ -39,5 +39,6 @@ namespace DevOpsPortal.Data
         public bool IsPasswordReset { get; set; }
         public virtual ICollection<ApplicationUserGroup> Groups { get; set; }
         public virtual ICollection<ApplicationRoleGroup> Roles { get; set; }
+        public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
     }
 }

@@ -70,6 +70,13 @@ namespace DevOpsSolution.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
+            var id = "202";
+
+            var roleIds = _db.UserRoles.Where(x => x.UserId == id).Select(x => x.RoleId).ToList();
+
+            var roles1 = _db.Roles.Where(x => roleIds.Contains(x.Id)).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByLoginAsync(model.UserName, model.Password);

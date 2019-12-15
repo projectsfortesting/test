@@ -16,6 +16,8 @@ namespace DevOpsPortal.Data
             this.Description = description;
         }
         public virtual string Description { get; set; }
+
+        public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
     }
 
 }
